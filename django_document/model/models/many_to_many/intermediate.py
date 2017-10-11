@@ -18,7 +18,7 @@ class Group(models.Model):
     name = models.CharField(max_length=50)
     debut_date = models.DateField()
     # through_fields안에 적는 순서는 (Source, Target)
-    members = models.ManyToManyField(Idol, through='Membership', through_fields=('group', 'idol',),)
+    members = models.ManyToManyField(Idol, through='Membership', through_fields=('group', 'idol',), )
 
     def __str__(self):
         return self.name
@@ -38,6 +38,8 @@ class Membership(models.Model):
     recommenders = models.ManyToManyField(
         Idol,
         null=True,
+        # ManyToMany또한 ForeignKey로 접근이 가능하기 때문에
+        # ManyToMany에도 역참조 오류는 동일 하게 발생, related_name을 지정하여 ForeignKey때와 동일 하게 해결
         related_name='recommend_membership_set',
     )
     joined_date = models.DateField()
