@@ -1,5 +1,11 @@
 from django.db import models
 
+__all__ = (
+    'School',
+    'CommonInfo',
+    'Student',
+    'Teacher',
+)
 
 class School(models.Model):
     name = models.CharField(max_length=30)
